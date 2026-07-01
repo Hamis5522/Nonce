@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: nonce-api
+    runtime: python
+    plan: free
+    region: oregon
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python3 server.py"
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.3"
+      - key: NONCE_DEV
+        value: "true"
+      - key: NONCE_JWT_SECRET
+        generateValue: true
+    autoDeploy: true
